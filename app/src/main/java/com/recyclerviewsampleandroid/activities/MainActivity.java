@@ -72,8 +72,8 @@ public class MainActivity extends AppCompatActivity implements OnResponseListene
             mGetAPIAsyncTask_Volley.requestAsync_GetWordsData();
         } else {
 
-            AppUtil.showAlert(this, getString(R.string.CheckYourInternetConnection), null, false,
-                    mOnClickListener_alert);
+            AppUtil.showAlert(this, getString(R.string.CheckYourInternetConnection), getString(R.string.
+                    RetryNow), false, mOnClickListener_alert);
         }
     }
 
