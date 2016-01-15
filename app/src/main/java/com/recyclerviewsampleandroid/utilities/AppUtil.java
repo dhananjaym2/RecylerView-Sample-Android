@@ -80,52 +80,21 @@ public class AppUtil {
         if (strMessageOnProgressDialog != null) {
             mProgressDialog.setMessage(strMessageOnProgressDialog);
         } else {
-            try {
-                mProgressDialog.setMessage(mContext.getString(R.string.LoadingProgressDialog));
-            } catch (Exception e) {
-                AppLog.showExceptionLogAndToast(mContext, "showProgressDialog", e);
-            }
+            mProgressDialog.setMessage(mContext.getString(R.string.LoadingProgressDialog));
         }
         mProgressDialog.setCancelable(false);
-        try {
-            mProgressDialog.show();
-        } catch (Exception e) {
-            AppLog.showExceptionLogAndToast(mContext, "showProgressDialog", e);
-
-            mProgressDialog = null;
-            mProgressDialog = new ProgressDialog(mContext);
-            if (strMessageOnProgressDialog != null) {
-                mProgressDialog.setMessage(strMessageOnProgressDialog);
-            } else {
-                try {
-                    mProgressDialog.setMessage(mContext.getString(R.string.LoadingProgressDialog));
-                } catch (Exception ex) {
-                    AppLog.showExceptionLogAndToast(mContext, "showProgressDialog", e);
-                }
-            }
-            mProgressDialog.setCancelable(false);
-            try {
-                mProgressDialog.show();
-            } catch (Exception ex) {
-                AppLog.showExceptionLogAndToast(mContext, "showProgressDialog", e);
-            }
-        }
+        mProgressDialog.show();
     }
 
     /**
      * static method to HIDE progress dialog for the App.
      */
     public static void hideProgressDialog() {
-        try {
-            if (mProgressDialog != null) {
-                if (mProgressDialog.isShowing()) {
-                    mProgressDialog.dismiss();
-                    mProgressDialog = null;
-                }
+        if (mProgressDialog != null) {
+            if (mProgressDialog.isShowing()) {
+                mProgressDialog.dismiss();
+                mProgressDialog = null;
             }
-        } catch (Exception e) {
-//            e.printStackTrace();
-//            AppLog.showExceptionLogAndToast(mContext, "hideProgressDialog", e);
         }
     }
 
@@ -159,10 +128,8 @@ public class AppUtil {
         if (strBtnText != null) {
             btnAlert_no_header.setText(strBtnText);
         }
-        try {
-            mDialog.show();
-        } catch (Exception e) {
-//            e.printStackTrace();
-        }
+
+        mDialog.show();
+
     }
 }
