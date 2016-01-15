@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/txtWord_word_list_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="txtWord_words_list_item"
+        android:textSize="@dimen/txt16sp"
+        android:textStyle="bold" />
+    <!--android:textColor="@android:color/black"-->
+    <!--alignParentLeft-->
+
+    <TextView
+        android:id="@+id/txtMeaning_word_list_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtWord_word_list_item"
+        android:layout_marginTop="@dimen/meaning_top_margin"
+        android:text="txtMeaning_words_list_item"
+        android:textSize="@dimen/txt16sp" />
+
+    <ImageView
+        android:id="@+id/imgWordImage_word_list_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:contentDescription="@string/app_name"
+        android:src="@mipmap/ic_launcher" />
+
+</RelativeLayout>
