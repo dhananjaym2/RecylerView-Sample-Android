@@ -6,6 +6,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import com.android.volley.VolleyError;
 import com.recyclerviewsampleandroid.R;
 import com.recyclerviewsampleandroid.adapters.recyler_view.WordsListAdapterRecyclerView;
 import com.recyclerviewsampleandroid.constants.AppConstants;
@@ -77,7 +78,7 @@ public class MainActivity extends AppCompatActivity implements OnResponseListene
     }
 
     @Override
-    public void onResponseReceived_Volley(String response) {
+    public void onResponseReceived_Volley(String response, VolleyError error) {
         if (response != null) {
 
             AppJsonParser mAppJsonParser = new AppJsonParser(this, response);
@@ -86,15 +87,20 @@ public class MainActivity extends AppCompatActivity implements OnResponseListene
 
             setWordsAdapter();
 
-        } else {
+        } else if (error != null) {
 
-            AppLog.e(LOG_TAG, "onResponseReceived_Volley() response null");
+            AppLog.e(LOG_TAG, "onResponseReceived_Volley() response null error:" + error.
+                    getLocalizedMessage());
         }
     }
 
     private void setWordsAdapter() {
         AppLog.d(LOG_TAG, "setWordsAdapter");
+
         if (arrayList_WordsModel != null) {
+
+            mWordsListAdapterRecyclerView = new WordsListAdapterRecyclerView(arrayList_WordsModel);
+            recyclerView_wordsList.setAdapter(mWordsListAdapterRecyclerView);
 
         } else
             AppLog.d(LOG_TAG, "arrayList_WordsModel null");

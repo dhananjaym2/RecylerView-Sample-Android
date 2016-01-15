@@ -51,7 +51,7 @@ public class GetAPIAsyncTask_Volley {
                         AppLog.d(LOG_TAG, API_CALLED_TAG + " API response:" + response);
                         AppUtil.hideProgressDialog();
 
-                        mOnResponseListener_Volley.onResponseReceived_Volley(response);
+                        mOnResponseListener_Volley.onResponseReceived_Volley(response, null);
                     }
                 },
                 new Response.ErrorListener() {
@@ -61,6 +61,7 @@ public class GetAPIAsyncTask_Volley {
                         AppLog.e(LOG_TAG, API_CALLED_TAG + " API error: " + error.getMessage());
                         // hide the progress dialog
                         AppUtil.hideProgressDialog();
+                        mOnResponseListener_Volley.onResponseReceived_Volley(null, error);
                         AppUtil.showAlert(mContext, mContext.getString(R.string.
                                 OopsSomethingWentWrongPleaseTryABitAgainLater), null, true, null);
                     }

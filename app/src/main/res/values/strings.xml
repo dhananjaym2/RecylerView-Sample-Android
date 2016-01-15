@@ -2,6 +2,5 @@
     <string name="app_name">RecyclerViewSampleAndroid</string>
     <string name="LoadingProgressDialog">Loading&#8230;</string>
     <string name="OopsSomethingWentWrongPleaseTryABitAgainLater">Oops! Something went wrong. Please try again a bit later.</string>
-    <string name="GetWordsUrl">http://appsculture.com/vocab/words.json</string>
     <string name="CheckYourInternetConnection">Please check your internet connection!</string>
 </resources>
