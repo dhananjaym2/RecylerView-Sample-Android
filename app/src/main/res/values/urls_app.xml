@@ -2,4 +2,5 @@
 <resources>
 
     <string name="GetWordsUrl">http://appsculture.com/vocab/words.json</string>
+    <string name="ImageOfWordsUrl">http://appsculture.com/vocab/images/%1$d.png</string>
 </resources>

@@ -9,7 +9,7 @@ public class WordsModel {
     private String word;
     private int variant;
     private String meaning;
-    private String ratio;
+    private double ratio;
 
     public int getId_WordsModel() {
         return id_WordsModel;
@@ -43,11 +43,11 @@ public class WordsModel {
         this.meaning = meaning;
     }
 
-    public String getRatio() {
+    public double getRatio() {
         return ratio;
     }
 
-    public void setRatio(String ratio) {
+    public void setRatio(double ratio) {
         this.ratio = ratio;
     }
 }

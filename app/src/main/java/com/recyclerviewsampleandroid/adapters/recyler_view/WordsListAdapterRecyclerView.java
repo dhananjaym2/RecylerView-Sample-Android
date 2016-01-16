@@ -1,5 +1,6 @@
 package com.recyclerviewsampleandroid.adapters.recyler_view;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,9 +8,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.android.volley.toolbox.ImageLoader;
 import com.recyclerviewsampleandroid.R;
+import com.recyclerviewsampleandroid.application.ApplicationDelegate;
 import com.recyclerviewsampleandroid.models.WordsModel;
 import com.recyclerviewsampleandroid.utilities.AppLog;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -19,12 +23,16 @@ import java.util.ArrayList;
 public class WordsListAdapterRecyclerView extends RecyclerView.Adapter
         <WordsListAdapterRecyclerView.WordsViewHolder> {
 
+    private Context mContext;
     private ArrayList<WordsModel> arrayList_WordsModel;
+    private ImageLoader mImageLoader_volley;
     private final String AppLog_TAG = this.getClass().getSimpleName();
 
-    public WordsListAdapterRecyclerView(ArrayList<WordsModel> arrayList_WordsModel) {
+    public WordsListAdapterRecyclerView(Context mContext, ArrayList<WordsModel> arrayList_WordsModel) {
 
+        this.mContext = mContext;
         this.arrayList_WordsModel = arrayList_WordsModel;
+        mImageLoader_volley = ApplicationDelegate.getApplicationInstance().getImageLoader();
 
     }
 
@@ -39,13 +47,40 @@ public class WordsListAdapterRecyclerView extends RecyclerView.Adapter
     }
 
     @Override
-    public void onBindViewHolder(WordsViewHolder holder, int position) {
+    public void onBindViewHolder(final WordsViewHolder holder, int position) {
 
         holder.txtWord_word_list_item.setText(arrayList_WordsModel.get(position).getWord());
-//        holder.imgWordImage_word_list_item.setText(arrayList_WordsModel.get(position).getMeaning());
+
         holder.txtMeaning_word_list_item.setText(arrayList_WordsModel.get(position).getMeaning());
 
-        AppLog.v(AppLog_TAG, "onBindViewHolder()");
+        AppLog.v(AppLog_TAG, "onBindViewHolder() mContext.getString(R.string.ImageOfWordsUrl, position)" +
+                mContext.getString(R.string.ImageOfWordsUrl, position));
+        // holder.imgWordImage_word_list_item  //mContext.getString(R.string.ImageOfWordsUrl, position)
+
+//        mImageLoader_volley.get(mContext.getString(R.string.ImageOfWordsUrl, position), new
+//                ImageLoader.ImageListener() {
+//
+//                    @Override
+//                    public void onErrorResponse(VolleyError error) {
+//                        Log.e(AppLog_TAG, "Image Load Error: " + error.getMessage());
+//                        holder.imgWordImage_word_list_item.setImageDrawable(mContext.getResources().
+//                                getDrawable(R.mipmap.dummy_image));
+//                    }
+//
+//                    @Override
+//                    public void onResponse(ImageLoader.ImageContainer response, boolean arg1) {
+//                        if (response.getBitmap() != null) {
+//                            // load image into imageview
+//                            holder.imgWordImage_word_list_item.setImageBitmap(response.getBitmap());
+//                        }
+//                    }
+//                });
+
+        Picasso.with(mContext)
+                .load(mContext.getString(R.string.ImageOfWordsUrl, position))
+                .placeholder(R.mipmap.dummy_image)
+                .error(R.mipmap.dummy_image)
+                .into(holder.imgWordImage_word_list_item);
     }
 
     @Override

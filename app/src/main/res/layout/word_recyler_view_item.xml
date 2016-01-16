@@ -8,7 +8,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="txtWord_words_list_item"
-        android:textSize="@dimen/txt16sp"
+        android:textSize="@dimen/txt18sp"
         android:textStyle="bold" />
     <!--android:textColor="@android:color/black"-->
     <!--alignParentLeft-->
@@ -28,7 +28,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
+        android:layout_toRightOf="@+id/txtWord_word_list_item"
         android:contentDescription="@string/app_name"
-        android:src="@mipmap/ic_launcher" />
+        android:src="@mipmap/dummy_image" />
 
 </RelativeLayout>

@@ -99,7 +99,8 @@ public class MainActivity extends AppCompatActivity implements OnResponseListene
 
         if (arrayList_WordsModel != null) {
 
-            mWordsListAdapterRecyclerView = new WordsListAdapterRecyclerView(arrayList_WordsModel);
+            mWordsListAdapterRecyclerView = new WordsListAdapterRecyclerView(MainActivity.this,
+                    arrayList_WordsModel);
             recyclerView_wordsList.setAdapter(mWordsListAdapterRecyclerView);
 
         } else
