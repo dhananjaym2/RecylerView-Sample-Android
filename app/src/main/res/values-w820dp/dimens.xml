@@ -3,4 +3,12 @@
          (such as screen margins) for screens with more than 820dp of available width. This
          would include 7" and 10" devices in landscape (~960dp and ~1280dp respectively). -->
     <dimen name="activity_horizontal_margin">64dp</dimen>
+    <dimen name="meaning_textSize">18sp</dimen>
+    <dimen name="meaning_top_margin">15dp</dimen>
+    <dimen name="alert_text_padding">15dp</dimen>
+    <dimen name="alert_text_size">18sp</dimen>
+    <dimen name="wordHeading_textSize">20sp</dimen>
+    <dimen name="maxHeight_WordImage_word_list_item">80dp</dimen>
+    <dimen name="paddingLeftRight_words_list_item">15dp</dimen>
+    <dimen name="paddingTopBottom_words_list_item">10dp</dimen>
 </resources>

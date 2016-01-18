@@ -124,7 +124,8 @@ public class MainActivity extends AppCompatActivity implements OnResponseListene
 
         if (mThread_saveInDatabase != null) {
 
-            mThread_saveInDatabase.interrupt();
+            if (!mThread_saveInDatabase.isInterrupted())
+                mThread_saveInDatabase.interrupt();
 
         } else {
 

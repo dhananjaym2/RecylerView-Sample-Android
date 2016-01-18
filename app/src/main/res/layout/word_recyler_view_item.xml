@@ -1,26 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:paddingEnd="@dimen/paddingLeftRight_words_list_item"
+    android:paddingLeft="@dimen/paddingLeftRight_words_list_item"
+    android:paddingRight="@dimen/paddingLeftRight_words_list_item"
+    android:paddingStart="@dimen/paddingLeftRight_words_list_item"
+    android:paddingTop="@dimen/paddingLeftRight_words_list_item">
 
     <TextView
         android:id="@+id/txtWord_word_list_item"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_toLeftOf="@+id/imgWordImage_word_list_item"
+        android:layout_toStartOf="@+id/imgWordImage_word_list_item"
         android:text="txtWord_words_list_item"
-        android:textSize="@dimen/txt18sp"
+        android:textSize="@dimen/wordHeading_textSize"
         android:textStyle="bold" />
     <!--android:textColor="@android:color/black"-->
     <!--alignParentLeft-->
 
     <TextView
         android:id="@+id/txtMeaning_word_list_item"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/txtWord_word_list_item"
         android:layout_marginTop="@dimen/meaning_top_margin"
+        android:layout_toLeftOf="@+id/imgWordImage_word_list_item"
+        android:layout_toStartOf="@+id/imgWordImage_word_list_item"
         android:text="txtMeaning_words_list_item"
-        android:textSize="@dimen/txt16sp" />
+        android:textSize="@dimen/meaning_textSize" />
 
     <ImageView
         android:id="@+id/imgWordImage_word_list_item"
@@ -28,8 +37,14 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_toRightOf="@+id/txtWord_word_list_item"
         android:contentDescription="@string/app_name"
+        android:maxHeight="@dimen/maxHeight_WordImage_word_list_item"
         android:src="@mipmap/dummy_image" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_alignParentBottom="true"
+        android:background="@android:color/black" />
 
 </RelativeLayout>

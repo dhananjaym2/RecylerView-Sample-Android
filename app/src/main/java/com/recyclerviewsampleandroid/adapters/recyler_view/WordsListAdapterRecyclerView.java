@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.recyclerviewsampleandroid.R;
 import com.recyclerviewsampleandroid.models.WordsModel;
 import com.recyclerviewsampleandroid.utilities.AppLog;
+import com.recyclerviewsampleandroid.utilities.AppUtil;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -24,12 +25,14 @@ public class WordsListAdapterRecyclerView extends RecyclerView.Adapter
     private Context mContext;
     private ArrayList<WordsModel> arrayList_WordsModel;
     private final String LOG_TAG = this.getClass().getSimpleName();
+    private int widthAndHeightOfImageView;
 
     public WordsListAdapterRecyclerView(Context mContext, ArrayList<WordsModel> arrayList_WordsModel) {
 
         this.mContext = mContext;
         this.arrayList_WordsModel = arrayList_WordsModel;
-
+        widthAndHeightOfImageView = (int) AppUtil.pxFromDp(mContext, mContext.getResources().
+                getDimension(R.dimen.maxHeight_WordImage_word_list_item));
     }
 
     @Override
@@ -56,6 +59,7 @@ public class WordsListAdapterRecyclerView extends RecyclerView.Adapter
                 .load(mContext.getString(R.string.ImageOfWordsUrl, position))
                 .placeholder(R.mipmap.dummy_image)
                 .error(R.mipmap.dummy_image)
+                .resize(widthAndHeightOfImageView, widthAndHeightOfImageView)
                 .into(holder.imgWordImage_word_list_item);
     }
 
