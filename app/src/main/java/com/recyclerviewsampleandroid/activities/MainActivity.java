@@ -10,6 +10,7 @@ import com.android.volley.VolleyError;
 import com.recyclerviewsampleandroid.R;
 import com.recyclerviewsampleandroid.adapters.recyler_view.WordsListAdapterRecyclerView;
 import com.recyclerviewsampleandroid.constants.AppConstants;
+import com.recyclerviewsampleandroid.database.DatabaseHelper;
 import com.recyclerviewsampleandroid.interfaces.OnResponseListener_Volley;
 import com.recyclerviewsampleandroid.models.WordsModel;
 import com.recyclerviewsampleandroid.parsers.AppJsonParser;
@@ -28,6 +29,8 @@ public class MainActivity extends AppCompatActivity implements OnResponseListene
     private OnResponseListener_Volley mOnResponseListener_Volley = this;
     private final String LOG_TAG = this.getClass().getSimpleName();
     private View.OnClickListener mOnClickListener_alert;
+    private DatabaseHelper mDatabaseHelper;
+    private Thread mThread_saveInDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +65,14 @@ public class MainActivity extends AppCompatActivity implements OnResponseListene
     private void getWordsData() {
         // TODO check if data is NOT available in DB then call API
 
-        if (AppUtil.isInternetNetworkConnected(MainActivity.this)) {
+        mDatabaseHelper = new DatabaseHelper(MainActivity.this);
+        arrayList_WordsModel = mDatabaseHelper.getAllWordsData_arrayList();
+
+        if (arrayList_WordsModel != null) {
+
+            setWordsAdapter();
+
+        } else if (AppUtil.isInternetNetworkConnected(MainActivity.this)) {
             String strURL_getWordsData = getString(R.string.GetWordsUrl);
 
             GetAPIAsyncTask_Volley mGetAPIAsyncTask_Volley = new GetAPIAsyncTask_Volley(
@@ -87,6 +97,8 @@ public class MainActivity extends AppCompatActivity implements OnResponseListene
 
             setWordsAdapter();
 
+            saveWordsDataInDB();
+
         } else if (error != null) {
 
             AppLog.e(LOG_TAG, "onResponseReceived_Volley() response null error:" + error.
@@ -98,6 +110,7 @@ public class MainActivity extends AppCompatActivity implements OnResponseListene
         AppLog.d(LOG_TAG, "setWordsAdapter");
 
         if (arrayList_WordsModel != null) {
+            AppLog.d(LOG_TAG, "arrayList_WordsModel.size():" + arrayList_WordsModel.size());
 
             mWordsListAdapterRecyclerView = new WordsListAdapterRecyclerView(MainActivity.this,
                     arrayList_WordsModel);
@@ -105,5 +118,29 @@ public class MainActivity extends AppCompatActivity implements OnResponseListene
 
         } else
             AppLog.d(LOG_TAG, "arrayList_WordsModel null");
+    }
+
+    private void saveWordsDataInDB() {
+
+        if (mThread_saveInDatabase != null) {
+
+            mThread_saveInDatabase.interrupt();
+
+        } else {
+
+            mThread_saveInDatabase = new Thread(new Runnable() {
+                @Override
+                public void run() {
+
+                    AppLog.d(LOG_TAG, "in run() of mThread_saveInDatabase");
+                    mDatabaseHelper.insertAllWordsData_arrayList(arrayList_WordsModel);
+
+                }
+            });
+        }
+
+        AppLog.d(LOG_TAG, "just before calling start() of mThread_saveInDatabase");
+
+        mThread_saveInDatabase.start();
     }
 }

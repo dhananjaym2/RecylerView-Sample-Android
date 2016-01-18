@@ -11,6 +11,17 @@ public class WordsModel {
     private String meaning;
     private double ratio;
 
+    public WordsModel() {
+    }
+
+    public WordsModel(int id_WordsModel, String word, int variant, String meaning, double ratio) {
+        this.id_WordsModel = id_WordsModel;
+        this.word = word;
+        this.variant = variant;
+        this.meaning = meaning;
+        this.ratio = ratio;
+    }
+
     public int getId_WordsModel() {
         return id_WordsModel;
     }
