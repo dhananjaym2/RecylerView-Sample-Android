@@ -20,13 +20,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     // All Static variables
     // Database Version
     private static final int DATABASE_VERSION = 1;
-    static DatabaseHelper dbHelperInstance;
 
     // Database Name
-    public static final String DATABASE_NAME = "WordsAppDB.sqlite";
+    private static final String DATABASE_NAME = "WordsAppDB.sqlite";
 
     // Tables' names
-    public static final String TABLE_WORDS = "words_table";
+    private static final String TABLE_WORDS = "words_table";
 
     /**
      * words Table Columns names
@@ -85,9 +84,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public void insertAllWordsData_arrayList(ArrayList<WordsModel> arrayList_WordsModel) {
         AppLog.v(LOG_TAG, "in insertAllWordsData_arrayList()");
+        SQLiteDatabase db = null;
         long resultOfQuery;
         try {
-            SQLiteDatabase db = this.getWritableDatabase();
+            db = this.getWritableDatabase();
 
             if (arrayList_WordsModel != null) {
 
@@ -103,7 +103,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                         values.put(KEY_RATIO, mWordsModel.getRatio());
 
                         resultOfQuery = db.insert(TABLE_WORDS, null, values);
-                        db.close();
 
                         AppLog.v(LOG_TAG, "checking insertAllWordsData_arrayList() values:" +
                                 values.toString() + " resultOfQuery:" + resultOfQuery);
@@ -117,13 +116,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 AppLog.e(LOG_TAG, "arrayList_WordsModel null in insertAllWordsData_arrayList()");
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+
+            if (db != null && db.isOpen())
+                db.close();
         }
     }
 
     public ArrayList<WordsModel> getAllWordsData_arrayList() {
         ArrayList<WordsModel> al_WordsModel = null;
+        SQLiteDatabase db = null;
         try {
-            SQLiteDatabase db = getReadableDatabase();
+            db = getReadableDatabase();
             Cursor cursor;
             String[] arrFieldsToGet = new String[]{KEY_ID_WORDS_MODEL, KEY_WORD,
                     KEY_VARIANT, KEY_MEANING, KEY_RATIO};
@@ -157,6 +161,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         } catch (Exception e) {
             e.printStackTrace();
+
+        } finally {
+
+            if (db != null && db.isOpen())
+                db.close();
         }
         return al_WordsModel;
     }
